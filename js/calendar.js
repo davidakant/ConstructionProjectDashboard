@@ -8,7 +8,7 @@ window.App = window.App || {};
   let viewDate = new Date();
 
   function initCalendar() {
-    events = loadData(STORAGE_KEY, []);
+    events = loadData(STORAGE_KEY, window.App.SeedEvents || []);
 
     document.getElementById("prevMonth").addEventListener("click", () => {
       viewDate.setMonth(viewDate.getMonth() - 1);
@@ -168,5 +168,9 @@ window.App = window.App || {};
     renderUpcoming();
   }
 
-  window.App.Calendar = { initCalendar, refresh };
+  function getEvents() {
+    return events;
+  }
+
+  window.App.Calendar = { initCalendar, refresh, getEvents };
 })();

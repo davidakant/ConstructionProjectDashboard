@@ -57,6 +57,12 @@ button {
   color: var(--color-text-muted);
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .current-date {
   font-size: 0.9rem;
   color: var(--color-text-muted);

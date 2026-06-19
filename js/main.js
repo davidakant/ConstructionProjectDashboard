@@ -10,7 +10,7 @@
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
-    const { Device, Nav, Tasks, Calendar, Drawings, Lightbox, createPhotoGrid } = window.App;
+    const { Device, Nav, Tasks, Calendar, Drawings, Lightbox, ExportSeed, createPhotoGrid } = window.App;
 
     Device.initDeviceDetection();
     setCurrentDate();
@@ -18,6 +18,7 @@
     Tasks.initTasks();
     Calendar.initCalendar();
     Lightbox.initLightbox();
+    ExportSeed.initExportSeed();
 
     const visualizations = createPhotoGrid({
       storeName: "visualizations",

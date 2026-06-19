@@ -9,7 +9,7 @@ window.App = window.App || {};
   let editingId = null;
 
   function initTasks() {
-    tasks = loadData(STORAGE_KEY, []);
+    tasks = loadData(STORAGE_KEY, window.App.SeedTasks || []);
 
     const addBtn = document.getElementById("addTaskBtn");
     const overlay = document.getElementById("taskModalOverlay");
