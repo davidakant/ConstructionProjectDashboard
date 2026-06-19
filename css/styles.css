@@ -193,6 +193,7 @@ button {
 
 .task-filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 12px;
 }
@@ -489,6 +490,19 @@ button {
   font-size: 1.1rem;
 }
 
+.calendar-months {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.calendar-month-heading {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -587,9 +601,13 @@ button {
   margin-top: 0;
 }
 
-.sidebar-section .task-list,
 .sidebar-section .event-list {
   max-height: 320px;
+  overflow-y: auto;
+}
+
+.sidebar-section .task-list {
+  max-height: 80vh;
   overflow-y: auto;
 }
 
@@ -827,6 +845,11 @@ button {
   font-weight: 700;
 }
 
+.summary-subtext {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
 .budget-list {
   list-style: none;
   margin: 0;
@@ -927,6 +950,197 @@ button {
 .budget-variance.over {
   color: var(--color-danger);
   font-weight: 600;
+}
+
+/* ---------- Overview (Project Charter) ---------- */
+
+.charter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.charter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  grid-column: span 2;
+}
+
+.charter-field-half {
+  grid-column: span 1;
+}
+
+.charter-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.charter-field-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.charter-display {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.charter-display.empty-state {
+  padding: 0;
+  text-align: left;
+}
+
+.modal.modal-wide {
+  width: min(700px, 92vw);
+}
+
+.charter-modal-textarea {
+  width: 100%;
+  min-height: 320px;
+  font-size: 0.95rem;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: inherit;
+  resize: vertical;
+}
+
+.charter-modal-textarea:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+/* ---------- Closeout (Punch List) ---------- */
+
+.punch-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.punch-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.punch-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.punch-item-description {
+  font-weight: 600;
+}
+
+.punch-item-assigned,
+.punch-item-notes {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.punch-status-badge {
+  flex: 0 0 auto;
+  border: none;
+  cursor: pointer;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+.punch-status-badge.status-open {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.punch-status-badge.status-fixed {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.punch-status-badge.status-verified {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* ---------- Team (Contacts Directory) ---------- */
+
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.contact-name {
+  font-weight: 600;
+}
+
+.contact-role,
+.contact-notes {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.contact-reach {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.contact-link {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
 }
 
 /* ---------- Shared ---------- */
@@ -1079,6 +1293,14 @@ button {
 
   .app-main {
     padding: 16px;
+  }
+
+  .charter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .charter-field-half {
+    grid-column: span 1;
   }
 }
 

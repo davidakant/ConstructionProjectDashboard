@@ -1,9 +1,22 @@
 window.App = window.App || {};
 
-// Default tasks/events/budget shown the first time the app loads in a
-// browser with no saved data yet (e.g. a fresh clone, or a visitor on
-// GitHub Pages). Regenerate this file from your current local data with
-// the "Export for GitHub" button, then commit it to publish your changes.
+// Default charter/tasks/events/budget/punch-list/contacts shown the first
+// time the app loads in a browser with no saved data yet (e.g. a fresh
+// clone, or a visitor on GitHub Pages). Regenerate this file from your
+// current local data with the "Export for GitHub" button, then commit it.
+window.App.SeedCharter = {
+  "title": "Riverside Elementary School Yard Recreation Area Refurbishment",
+  "sponsor": "Riverside Unified School District – Office of Facilities & Operations",
+  "projectManager": "Jordan Reyes, Construction Project Manager",
+  "startDate": "June 18, 2026",
+  "targetCompletion": "December 18, 2026",
+  "purpose": "The existing playground and recreation area at Riverside Elementary School has exceeded its useful life and no longer meets current safety, accessibility, or capacity standards. Several structures have been flagged in recent safety audits, and the site lacks ADA-compliant routes and equipment. This project will fully refurbish the school yard recreation area to provide a safe, modern, and inclusive space for students, families, and the surrounding community.",
+  "objectives": "- Replace aging and non-compliant play equipment with modern, age-appropriate structures.\n- Provide ADA-accessible play features and accessible routes throughout the site.\n- Resurface the basketball court and improve sports field markings.\n- Improve site drainage, safety surfacing, and perimeter fencing.\n- Deliver the project within the approved budget of $352,500 and substantially complete by December 18, 2026.",
+  "scope": "In Scope: Demolition of existing play structures; site grading and drainage; poured-in-place rubber and engineered wood fiber safety surfacing; new playground equipment (climbing structure, swings, spinners); basketball court resurfacing; soccer field striping; perimeter fencing; shade structure; landscaping and irrigation; site furnishings.\n\nOut of Scope: Classroom building renovations, parking lot resurfacing, and HVAC upgrades.",
+  "stakeholders": "Riverside Unified School District (Owner) - Office of Facilities & Operations\nRiverside Elementary School Administration - Principal Smith\nGeneral Contractor and Subcontractors\nPlayground Equipment Supplier\nParent-Teacher Association (PTA)\nCity Building & Safety Department (Permitting and Inspections)",
+  "successCriteria": "The project is considered successful if the recreation area passes final city inspection, meets all ADA accessibility requirements, is delivered within 10% of the approved budget, and is ready for student use by the start of the spring semester.",
+  "assumptions": "Assumes normal weather conditions with no major weather-related delays. Major demolition and high-noise work will be scheduled during summer break to minimize disruption to the school schedule. Site access is limited to the designated construction entrance on the north side of the property. Permits and inspections are assumed to be approved within standard city timelines."
+};
 window.App.SeedTasks = [
   {
     "id": "mqk2wtid6fy8rs",
@@ -241,6 +254,15 @@ window.App.SeedTasks = [
     "done": false
   },
   {
+    "id": "task-punch-list",
+    "title": "Punch List",
+    "startDate": "2026-12-10",
+    "dueDate": "2026-12-12",
+    "priority": "high",
+    "notes": "Resolve all deficiencies identified during final walkthrough before inspection",
+    "done": false
+  },
+  {
     "id": "task-stakeholder-04",
     "title": "Final Inspection & Certificate of Occupancy",
     "startDate": "2026-12-12",
@@ -397,6 +419,262 @@ window.App.SeedBudgetItems = [
     "item": "Contingency reserve (~8% of budget)",
     "budgeted": 27000,
     "actual": 0,
+    "notes": ""
+  }
+];
+window.App.SeedPunchListItems = [
+  {
+    "id": "seed-punch-1",
+    "location": "Main Play Structure",
+    "description": "Touch up scratched paint on slide handrail",
+    "assignedTo": "Playground Install Crew",
+    "status": "fixed",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-2",
+    "location": "Main Play Structure",
+    "description": "Tighten loose bolt on north climbing wall",
+    "assignedTo": "Playground Install Crew",
+    "status": "open",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-3",
+    "location": "Basketball Court",
+    "description": "Re-stripe free-throw line, paint faded in one spot",
+    "assignedTo": "Court Resurfacing Sub",
+    "status": "verified",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-4",
+    "location": "Soccer Field",
+    "description": "Adjust soccer goal net tension on east goal",
+    "assignedTo": "Sports Equipment Sub",
+    "status": "open",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-5",
+    "location": "Perimeter Fencing",
+    "description": "Replace bent fence post near west gate",
+    "assignedTo": "Fencing Sub",
+    "status": "fixed",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-6",
+    "location": "Safety Surfacing",
+    "description": "Patch small gap in rubber surfacing seam near swings",
+    "assignedTo": "Surfacing Sub",
+    "status": "open",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-7",
+    "location": "Shade Structure",
+    "description": "Re-tension shade sail, sagging on south corner",
+    "assignedTo": "Shade Structure Installer",
+    "status": "open",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-8",
+    "location": "Landscaping",
+    "description": "Replace two dead shrubs near entrance",
+    "assignedTo": "Landscaping Sub",
+    "status": "open",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-9",
+    "location": "Irrigation",
+    "description": "Fix sprinkler head spraying onto sidewalk",
+    "assignedTo": "Irrigation Sub",
+    "status": "fixed",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-10",
+    "location": "Furnishings",
+    "description": "Tighten wobbly leg on picnic table #3",
+    "assignedTo": "GC Punch Crew",
+    "status": "verified",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-11",
+    "location": "Entrance Signage",
+    "description": "Install missing \"No Skateboarding\" sign",
+    "assignedTo": "GC Punch Crew",
+    "status": "open",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-12",
+    "location": "Drainage",
+    "description": "Clear debris from catch basin near basketball court",
+    "assignedTo": "Site Sub",
+    "status": "fixed",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-13",
+    "location": "Swing Set",
+    "description": "Lubricate squeaky swing chain, bay 2",
+    "assignedTo": "Playground Install Crew",
+    "status": "verified",
+    "notes": ""
+  },
+  {
+    "id": "seed-punch-14",
+    "location": "ADA Accessibility",
+    "description": "Confirm accessible route slope meets ADA spec at ramp",
+    "assignedTo": "GC / Inspector",
+    "status": "open",
+    "notes": ""
+  }
+];
+window.App.SeedContacts = [
+  {
+    "id": "seed-contact-1",
+    "name": "Jordan Reyes",
+    "role": "Construction Project Manager",
+    "company": "Riverside Unified School District",
+    "category": "Owner/District",
+    "phone": "(555) 201-4488",
+    "email": "jreyes@riversideusd.gov",
+    "notes": ""
+  },
+  {
+    "id": "seed-contact-2",
+    "name": "Angela Smith",
+    "role": "Principal",
+    "company": "Riverside Elementary School",
+    "category": "Owner/District",
+    "phone": "(555) 201-7732",
+    "email": "asmith@riversideusd.gov",
+    "notes": ""
+  },
+  {
+    "id": "seed-contact-3",
+    "name": "Michael Chen",
+    "role": "Director of Facilities & Operations",
+    "company": "Riverside Unified School District",
+    "category": "Owner/District",
+    "phone": "(555) 201-9015",
+    "email": "mchen@riversideusd.gov",
+    "notes": "Project sponsor"
+  },
+  {
+    "id": "seed-contact-4",
+    "name": "Sarah Patel",
+    "role": "Principal / General Contractor",
+    "company": "Patel Construction Group",
+    "category": "General Contractor",
+    "phone": "(555) 488-3310",
+    "email": "spatel@patelconstructiongroup.com",
+    "notes": ""
+  },
+  {
+    "id": "seed-contact-5",
+    "name": "Tom Whitfield",
+    "role": "Site Superintendent",
+    "company": "Patel Construction Group",
+    "category": "General Contractor",
+    "phone": "(555) 488-3322",
+    "email": "twhitfield@patelconstructiongroup.com",
+    "notes": "Primary on-site contact"
+  },
+  {
+    "id": "seed-contact-6",
+    "name": "Raj Kumar, PE",
+    "role": "Civil Engineer",
+    "company": "Kumar Engineering Associates",
+    "category": "Design/Engineering",
+    "phone": "(555) 309-1147",
+    "email": "rkumar@kumarengineering.com",
+    "notes": "zoom 123 456 789"
+  },
+  {
+    "id": "seed-contact-7",
+    "name": "Lisa Nakamura, RA",
+    "role": "Project Architect",
+    "company": "Nakamura Design Studio",
+    "category": "Design/Engineering",
+    "phone": "(555) 309-5560",
+    "email": "lnakamura@nakamuradesign.com",
+    "notes": ""
+  },
+  {
+    "id": "seed-contact-8",
+    "name": "Carlos Mendez",
+    "role": "Owner",
+    "company": "Mendez Fencing Co.",
+    "category": "Subcontractor",
+    "phone": "(555) 622-0193",
+    "email": "carlos@mendezfencing.com",
+    "notes": ""
+  },
+  {
+    "id": "seed-contact-9",
+    "name": "Denise Okafor",
+    "role": "Project Manager",
+    "company": "SafeSurface Solutions",
+    "category": "Subcontractor",
+    "phone": "(555) 622-7741",
+    "email": "denise@safesurfacesolutions.com",
+    "notes": "Safety surfacing installer"
+  },
+  {
+    "id": "seed-contact-10",
+    "name": "Mike Tran",
+    "role": "Owner",
+    "company": "ProCourt Resurfacing",
+    "category": "Subcontractor",
+    "phone": "(555) 622-8854",
+    "email": "mtran@procourtresurfacing.com",
+    "notes": ""
+  },
+  {
+    "id": "seed-contact-11",
+    "name": "Maria Gonzalez",
+    "role": "Owner",
+    "company": "Greenscape Irrigation & Landscaping",
+    "category": "Subcontractor",
+    "phone": "(555) 622-4420",
+    "email": "maria@greenscapeil.com",
+    "notes": ""
+  },
+  {
+    "id": "seed-contact-12",
+    "name": "Brian O'Connell",
+    "role": "Account Manager",
+    "company": "PlayCore Equipment",
+    "category": "Supplier",
+    "phone": "(555) 740-2256",
+    "email": "boconnell@playcoreequip.com",
+    "notes": "Playground equipment supplier"
+  },
+  {
+    "id": "seed-contact-13",
+    "name": "James Park",
+    "role": "Senior Inspector",
+    "company": "City of Riverside Building & Safety Dept.",
+    "category": "Inspector/Permitting",
+    "phone": "(555) 815-3300",
+    "email": "jpark@cityofriverside.gov",
+    "notes": ""
+  },
+  {
+    "id": "seed-contact-14",
+    "name": "Karen Liu",
+    "role": "PTA President",
+    "company": "Riverside Elementary PTA",
+    "category": "Community",
+    "phone": "(555) 902-6671",
+    "email": "karen.liu@riversidepta.org",
     "notes": ""
   }
 ];

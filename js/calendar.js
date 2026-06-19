@@ -63,14 +63,13 @@ window.App = window.App || {};
     document.getElementById("eventForm").reset();
   }
 
-  function renderCalendar() {
-    const grid = document.getElementById("calendarGrid");
-    const label = document.getElementById("calendarMonthLabel");
+  function renderMonthGrid(gridId, headingId, year, month) {
+    const grid = document.getElementById(gridId);
+    const heading = document.getElementById(headingId);
     grid.innerHTML = "";
 
-    const year = viewDate.getFullYear();
-    const month = viewDate.getMonth();
-    label.textContent = viewDate.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+    const monthDate = new Date(year, month, 1);
+    heading.textContent = monthDate.toLocaleDateString(undefined, { month: "long", year: "numeric" });
 
     ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].forEach((d) => {
       const head = document.createElement("div");
@@ -126,6 +125,20 @@ window.App = window.App || {};
     }
   }
 
+  function renderCalendar() {
+    const year = viewDate.getFullYear();
+    const month = viewDate.getMonth();
+    const nextMonthDate = new Date(year, month + 1, 1);
+
+    const label = document.getElementById("calendarMonthLabel");
+    const startLabel = viewDate.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+    const endLabel = nextMonthDate.toLocaleDateString(undefined, { month: "long", year: "numeric" });
+    label.textContent = `${startLabel} – ${endLabel}`;
+
+    renderMonthGrid("calendarGrid1", "calendarMonthHeading1", year, month);
+    renderMonthGrid("calendarGrid2", "calendarMonthHeading2", nextMonthDate.getFullYear(), nextMonthDate.getMonth());
+  }
+
   function renderUpcoming() {
     const list = document.getElementById("upcomingEventsList");
     list.innerHTML = "";
@@ -164,6 +177,7 @@ window.App = window.App || {};
     renderCalendar();
     renderUpcoming();
     window.App.Gantt?.render();
+    window.App.KpiSummary?.render();
   }
 
   function getEvents() {

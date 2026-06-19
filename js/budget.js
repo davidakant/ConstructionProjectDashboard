@@ -77,6 +77,7 @@ window.App = window.App || {};
 
   function renderBudget() {
     renderSummary();
+    window.App.KpiSummary?.render();
 
     const list = document.getElementById("budgetList");
     list.innerHTML = "";

@@ -2,19 +2,25 @@ window.App = window.App || {};
 
 (function () {
   function buildSeedFileContents() {
+    const charter = window.App.Charter.getCharter();
     const tasks = window.App.Tasks.getTasks();
     const events = window.App.Calendar.getEvents();
     const budgetItems = window.App.Budget.getBudgetItems();
+    const punchListItems = window.App.Closeout.getPunchListItems();
+    const contacts = window.App.Team.getContacts();
     return [
       "window.App = window.App || {};",
       "",
-      "// Default tasks/events/budget shown the first time the app loads in a",
-      "// browser with no saved data yet (e.g. a fresh clone, or a visitor on",
-      '// GitHub Pages). Regenerate this file from your current local data with',
-      '// the "Export for GitHub" button, then commit it to publish your changes.',
+      "// Default charter/tasks/events/budget/punch-list/contacts shown the first",
+      "// time the app loads in a browser with no saved data yet (e.g. a fresh",
+      '// clone, or a visitor on GitHub Pages). Regenerate this file from your',
+      '// current local data with the "Export for GitHub" button, then commit it.',
+      `window.App.SeedCharter = ${JSON.stringify(charter, null, 2)};`,
       `window.App.SeedTasks = ${JSON.stringify(tasks, null, 2)};`,
       `window.App.SeedEvents = ${JSON.stringify(events, null, 2)};`,
       `window.App.SeedBudgetItems = ${JSON.stringify(budgetItems, null, 2)};`,
+      `window.App.SeedPunchListItems = ${JSON.stringify(punchListItems, null, 2)};`,
+      `window.App.SeedContacts = ${JSON.stringify(contacts, null, 2)};`,
       "",
     ].join("\n");
   }

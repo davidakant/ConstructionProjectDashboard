@@ -23,14 +23,137 @@
     </header>
 
     <nav class="main-nav" id="mainNav">
-      <button class="nav-btn active" data-panel="schedule">Schedule</button>
+      <button class="nav-btn active" data-panel="overview">Overview</button>
+      <button class="nav-btn" data-panel="schedule">Schedule</button>
       <button class="nav-btn" data-panel="documents">Documents</button>
       <button class="nav-btn" data-panel="budget">Budget</button>
+      <button class="nav-btn" data-panel="closeout">Closeout</button>
+      <button class="nav-btn" data-panel="team">Team</button>
     </nav>
 
     <main class="app-main">
+      <!-- Overview Panel: KPI Summary + Project Charter -->
+      <section class="panel active" id="panel-overview" data-panel="overview">
+        <div class="panel-header">
+          <h2>Project Overview</h2>
+        </div>
+
+        <div class="budget-summary" id="overviewKpiSummary">
+          <div class="summary-card">
+            <span class="summary-label">Budget Used</span>
+            <span class="summary-value" id="kpiBudgetUsed">0%</span>
+            <span class="summary-subtext" id="kpiBudgetUsedDetail"></span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Tasks Completed</span>
+            <span class="summary-value" id="kpiTasksCompleted">0 / 0</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Open Punch List Items</span>
+            <span class="summary-value" id="kpiPunchOpen">0</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Next Milestone</span>
+            <span class="summary-value" id="kpiNextMilestone">&mdash;</span>
+            <span class="summary-subtext" id="kpiNextMilestoneDetail"></span>
+          </div>
+        </div>
+
+        <div class="panel-header">
+          <h2>Project Charter</h2>
+        </div>
+
+        <div class="charter-grid">
+          <div class="charter-field">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Project Title</span>
+              <button class="icon-btn edit-btn" data-field="title" aria-label="Edit Project Title">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterTitleDisplay"></p>
+          </div>
+
+          <div class="charter-field charter-field-half">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Project Sponsor</span>
+              <button class="icon-btn edit-btn" data-field="sponsor" aria-label="Edit Project Sponsor">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterSponsorDisplay"></p>
+          </div>
+          <div class="charter-field charter-field-half">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Project Manager</span>
+              <button class="icon-btn edit-btn" data-field="projectManager" aria-label="Edit Project Manager">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterProjectManagerDisplay"></p>
+          </div>
+
+          <div class="charter-field charter-field-half">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Start Date</span>
+              <button class="icon-btn edit-btn" data-field="startDate" aria-label="Edit Start Date">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterStartDateDisplay"></p>
+          </div>
+          <div class="charter-field charter-field-half">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Target Completion</span>
+              <button class="icon-btn edit-btn" data-field="targetCompletion" aria-label="Edit Target Completion">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterTargetCompletionDisplay"></p>
+          </div>
+
+          <div class="charter-field">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Purpose &amp; Background</span>
+              <button class="icon-btn edit-btn" data-field="purpose" aria-label="Edit Purpose &amp; Background">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterPurposeDisplay"></p>
+          </div>
+
+          <div class="charter-field">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Objectives</span>
+              <button class="icon-btn edit-btn" data-field="objectives" aria-label="Edit Objectives">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterObjectivesDisplay"></p>
+          </div>
+
+          <div class="charter-field">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Scope</span>
+              <button class="icon-btn edit-btn" data-field="scope" aria-label="Edit Scope">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterScopeDisplay"></p>
+          </div>
+
+          <div class="charter-field">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Key Stakeholders</span>
+              <button class="icon-btn edit-btn" data-field="stakeholders" aria-label="Edit Key Stakeholders">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterStakeholdersDisplay"></p>
+          </div>
+
+          <div class="charter-field">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Success Criteria</span>
+              <button class="icon-btn edit-btn" data-field="successCriteria" aria-label="Edit Success Criteria">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterSuccessCriteriaDisplay"></p>
+          </div>
+
+          <div class="charter-field">
+            <div class="charter-field-header">
+              <span class="charter-field-label">Assumptions &amp; Constraints</span>
+              <button class="icon-btn edit-btn" data-field="assumptions" aria-label="Edit Assumptions &amp; Constraints">&#9998;</button>
+            </div>
+            <p class="charter-display" id="charterAssumptionsDisplay"></p>
+          </div>
+        </div>
+      </section>
+
       <!-- Schedule + Tasks Panel -->
-      <section class="panel active" id="panel-schedule" data-panel="schedule">
+      <section class="panel" id="panel-schedule" data-panel="schedule">
         <div class="calendar-layout">
           <div class="calendar-main">
             <div class="schedule-toolbar">
@@ -47,7 +170,16 @@
                 <h2 id="calendarMonthLabel"></h2>
                 <button id="nextMonth" class="icon-btn" aria-label="Next month">&rsaquo;</button>
               </div>
-              <div class="calendar-grid" id="calendarGrid"></div>
+              <div class="calendar-months">
+                <div class="calendar-month-block">
+                  <h3 class="calendar-month-heading" id="calendarMonthHeading1"></h3>
+                  <div class="calendar-grid" id="calendarGrid1"></div>
+                </div>
+                <div class="calendar-month-block">
+                  <h3 class="calendar-month-heading" id="calendarMonthHeading2"></h3>
+                  <div class="calendar-grid" id="calendarGrid2"></div>
+                </div>
+              </div>
             </div>
 
             <div class="schedule-view" data-view="gantt">
@@ -157,6 +289,63 @@
 
         <ul class="budget-list" id="budgetList"></ul>
       </section>
+
+      <!-- Closeout Panel: Punch List -->
+      <section class="panel" id="panel-closeout" data-panel="closeout">
+        <div class="panel-header">
+          <h2>Closeout</h2>
+          <button class="btn btn-primary" id="addPunchItemBtn">+ Add Punch List Item</button>
+        </div>
+
+        <div class="budget-summary" id="punchSummary">
+          <div class="summary-card">
+            <span class="summary-label">Total Items</span>
+            <span class="summary-value" id="summaryPunchTotal">0</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Open</span>
+            <span class="summary-value" id="summaryPunchOpen">0</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Fixed</span>
+            <span class="summary-value" id="summaryPunchFixed">0</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Verified</span>
+            <span class="summary-value" id="summaryPunchVerified">0</span>
+          </div>
+        </div>
+
+        <div class="task-filters" id="punchFilters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="open">Open</button>
+          <button class="filter-btn" data-filter="fixed">Fixed</button>
+          <button class="filter-btn" data-filter="verified">Verified</button>
+        </div>
+
+        <ul class="punch-list" id="punchList"></ul>
+      </section>
+
+      <!-- Team Panel: Contacts Directory -->
+      <section class="panel" id="panel-team" data-panel="team">
+        <div class="panel-header">
+          <h2>Team &amp; Contacts</h2>
+          <button class="btn btn-primary" id="addContactBtn">+ Add Contact</button>
+        </div>
+
+        <div class="task-filters" id="contactFilters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Owner/District">Owner/District</button>
+          <button class="filter-btn" data-filter="General Contractor">General Contractor</button>
+          <button class="filter-btn" data-filter="Design/Engineering">Design/Engineering</button>
+          <button class="filter-btn" data-filter="Subcontractor">Subcontractor</button>
+          <button class="filter-btn" data-filter="Supplier">Supplier</button>
+          <button class="filter-btn" data-filter="Inspector/Permitting">Inspector/Permitting</button>
+          <button class="filter-btn" data-filter="Community">Community</button>
+        </div>
+
+        <ul class="contact-list" id="contactList"></ul>
+      </section>
     </main>
   </div>
 
@@ -231,6 +420,74 @@
     </div>
   </div>
 
+  <!-- Add/Edit Punch List Item Modal -->
+  <div class="modal-overlay" id="punchModalOverlay">
+    <div class="modal" id="punchModal">
+      <h3 id="punchModalTitle">Add Punch List Item</h3>
+      <form id="punchForm">
+        <label>Location <input type="text" id="punchLocation" required></label>
+        <label>Description <input type="text" id="punchDescription" required></label>
+        <label>Assigned To <input type="text" id="punchAssignedTo"></label>
+        <label>Status
+          <select id="punchStatus">
+            <option value="open">Open</option>
+            <option value="fixed">Fixed</option>
+            <option value="verified">Verified</option>
+          </select>
+        </label>
+        <label>Notes <textarea id="punchNotes"></textarea></label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelPunchBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="punchSubmitBtn">Save Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Edit Charter Section Modal -->
+  <div class="modal-overlay" id="charterModalOverlay">
+    <div class="modal modal-wide" id="charterModal">
+      <h3 id="charterModalTitle">Edit Section</h3>
+      <form id="charterForm">
+        <textarea id="charterModalTextarea" class="charter-modal-textarea"></textarea>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelCharterBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add/Edit Contact Modal -->
+  <div class="modal-overlay" id="contactModalOverlay">
+    <div class="modal" id="contactModal">
+      <h3 id="contactModalTitle">Add Contact</h3>
+      <form id="contactForm">
+        <label>Name <input type="text" id="contactName" required></label>
+        <label>Role / Title <input type="text" id="contactRole"></label>
+        <label>Company <input type="text" id="contactCompany"></label>
+        <label>Category
+          <select id="contactCategory">
+            <option value="Owner/District">Owner/District</option>
+            <option value="General Contractor">General Contractor</option>
+            <option value="Design/Engineering">Design/Engineering</option>
+            <option value="Subcontractor">Subcontractor</option>
+            <option value="Supplier">Supplier</option>
+            <option value="Inspector/Permitting">Inspector/Permitting</option>
+            <option value="Community">Community</option>
+          </select>
+        </label>
+        <label>Phone <input type="tel" id="contactPhone"></label>
+        <label>Email <input type="email" id="contactEmail"></label>
+        <label>Notes <textarea id="contactNotes"></textarea></label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelContactBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="contactSubmitBtn">Save Contact</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Lightbox for Visualizations -->
   <div class="modal-overlay" id="lightboxOverlay">
     <div class="lightbox">
@@ -245,10 +502,14 @@
   <script src="js/device.js"></script>
   <script src="js/nav.js"></script>
   <script src="data/seed.js"></script>
+  <script src="js/charter.js"></script>
   <script src="js/tasks.js"></script>
   <script src="js/calendar.js"></script>
   <script src="js/gantt.js"></script>
   <script src="js/budget.js"></script>
+  <script src="js/closeout.js"></script>
+  <script src="js/team.js"></script>
+  <script src="js/kpiSummary.js"></script>
   <script src="js/exportSeed.js"></script>
   <script src="drawings/manifest.js"></script>
   <script src="js/drawings.js"></script>
