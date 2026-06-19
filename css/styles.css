@@ -1,0 +1,820 @@
+:root {
+  --color-bg: #f4f6f8;
+  --color-surface: #ffffff;
+  --color-border: #dde3ea;
+  --color-text: #1f2933;
+  --color-text-muted: #5f6b7a;
+  --color-primary: #2563eb;
+  --color-primary-dark: #1d4ed8;
+  --color-accent: #f59e0b;
+  --color-accent-dark: #b45309;
+  --color-danger: #dc2626;
+  --color-success: #16a34a;
+  --radius: 8px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---------- Header & Nav ---------- */
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.project-name {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.current-date {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.main-nav {
+  display: flex;
+  gap: 4px;
+  padding: 8px 24px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  overflow-x: auto;
+}
+
+.nav-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.nav-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.nav-btn:hover:not(.active) {
+  background: var(--color-bg);
+}
+
+/* ---------- Layout / Panels ---------- */
+
+.app-main {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+  animation: fadeIn 0.15s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.panel-header h2,
+.panel-header h3 {
+  margin: 0;
+}
+
+/* ---------- Buttons / Controls ---------- */
+
+.btn {
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.file-btn {
+  display: inline-flex;
+  align-items: center;
+}
+
+.file-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  padding: 4px 8px;
+  border-radius: var(--radius);
+}
+
+.icon-btn:hover {
+  background: var(--color-bg);
+  color: var(--color-primary);
+}
+
+.icon-btn.delete-btn:hover {
+  color: var(--color-danger);
+}
+
+/* ---------- Tasks ---------- */
+
+.task-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.filter-btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.task-item.done {
+  opacity: 0.55;
+}
+
+.task-item.done .task-title {
+  text-decoration: line-through;
+}
+
+.task-item.milestone {
+  background: #fffbeb;
+}
+
+.icon-btn.milestone-btn:hover {
+  background: var(--color-bg);
+  color: var(--color-accent-dark);
+}
+
+.icon-btn.milestone-btn.active {
+  color: var(--color-accent-dark);
+}
+
+.task-check input {
+  width: 20px;
+  height: 20px;
+}
+
+.task-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.task-title {
+  font-weight: 600;
+}
+
+.task-due,
+.task-notes {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-low { background: #e0f2fe; color: #075985; }
+.badge-medium { background: #fef3c7; color: #92400e; }
+.badge-high { background: #fee2e2; color: #991b1b; }
+
+.priority-high { border-left: 4px solid var(--color-danger); }
+.priority-medium { border-left: 4px solid var(--color-accent); }
+.priority-low { border-left: 4px solid var(--color-success); }
+
+/* ---------- Calendar ---------- */
+
+.calendar-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.calendar-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.calendar-toolbar h2 {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar-day-head {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding-bottom: 4px;
+}
+
+.calendar-day {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  min-height: 90px;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.calendar-day.empty {
+  background: transparent;
+  border: none;
+  cursor: default;
+}
+
+.calendar-day:hover {
+  border-color: var(--color-primary);
+}
+
+.calendar-day.today {
+  border: 2px solid var(--color-primary);
+}
+
+.calendar-day.has-milestone {
+  background: #fffbeb;
+}
+
+.day-number {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.event-tag {
+  font-size: 0.7rem;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 4px;
+  padding: 2px 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.event-tag.milestone {
+  background: var(--color-accent);
+  color: #1f2933;
+}
+
+.event-tag.task-tag {
+  background: var(--color-success);
+}
+
+.event-tag.task-tag.milestone-task {
+  background: var(--color-accent-dark);
+  color: #fff;
+}
+
+.event-tag.task-tag.done {
+  background: #94a3b8;
+  text-decoration: line-through;
+}
+
+.calendar-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sidebar-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.sidebar-section h3 {
+  margin-top: 0;
+}
+
+.sidebar-section .task-list,
+.sidebar-section .event-list {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.event-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.event-item {
+  border-left: 4px solid var(--color-primary);
+  padding: 8px 12px;
+  background: var(--color-bg);
+  border-radius: var(--radius);
+}
+
+.event-item.milestone {
+  border-left-color: var(--color-accent);
+  background: #fffbeb;
+}
+
+.event-date {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.event-title {
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Documents (Drawings + Visualizations) ---------- */
+
+.documents-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.documents-section .panel-header {
+  margin-bottom: 16px;
+}
+
+/* ---------- Drawings ---------- */
+
+.drawings-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 24px;
+  min-height: 45vh;
+}
+
+.drawings-list-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  height: fit-content;
+}
+
+.drawings-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 45vh;
+  overflow-y: auto;
+}
+
+.drawing-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.85rem;
+  gap: 8px;
+}
+
+.drawing-item:hover {
+  background: var(--color-bg);
+}
+
+.drawing-item.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.drawing-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drawing-viewer-wrapper {
+  position: relative;
+}
+
+.drawing-viewer {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 45vh;
+  overflow: hidden;
+}
+
+.drawing-viewer.has-drawing {
+  cursor: grab;
+}
+
+.drawing-viewer.has-drawing.panning {
+  cursor: grabbing;
+}
+
+.drawing-viewer.panning .drawing-image,
+.drawing-viewer.panning .drawing-frame {
+  transition: none;
+}
+
+.drawing-zoom-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 4px;
+}
+
+.zoom-btn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.drawing-image {
+  max-width: 100%;
+  max-height: 55vh;
+  object-fit: contain;
+  transform-origin: center center;
+  transition: transform 0.1s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.drawing-frame {
+  width: 100%;
+  height: 55vh;
+  border: none;
+  transform-origin: center center;
+  transition: transform 0.1s ease;
+}
+
+/* ---------- Gallery ---------- */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.gallery-item {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background: var(--color-surface);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  cursor: pointer;
+  display: block;
+}
+
+.gallery-item .delete-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+}
+
+/* ---------- Shared ---------- */
+
+.empty-state {
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: 16px;
+  text-align: center;
+}
+
+/* ---------- Modals ---------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: min(420px, 100%);
+  box-shadow: var(--shadow-md);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h3 {
+  margin-top: 0;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  gap: 4px;
+  color: var(--color-text-muted);
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+  font-size: 0.95rem;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: inherit;
+}
+
+.checkbox-label {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ---------- Lightbox ---------- */
+
+.lightbox {
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+.lightbox-close {
+  align-self: flex-end;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#lightboxCaption {
+  color: #fff;
+  font-size: 0.85rem;
+}
+
+/* ---------- Responsive: general small screens ---------- */
+
+@media (max-width: 1024px) {
+  .calendar-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .drawings-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .drawings-list-panel {
+    order: 2;
+  }
+
+  .drawing-viewer {
+    order: 1;
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .app-main {
+    padding: 16px;
+  }
+}
+
+/* ---------- iPad-specific reformatting ----------
+   Applied via the .device-ipad class set by js/device.js,
+   since iPadOS Safari can report desktop-width viewports
+   that plain max-width queries would miss. */
+
+body.device-ipad .app-header {
+  padding: 12px 16px;
+}
+
+body.device-ipad .main-nav {
+  padding: 8px 16px;
+  gap: 8px;
+}
+
+body.device-ipad .nav-btn {
+  padding: 12px 18px;
+  font-size: 1rem;
+  min-height: 44px;
+}
+
+body.device-ipad .btn,
+body.device-ipad .icon-btn,
+body.device-ipad .filter-btn {
+  min-height: 44px;
+}
+
+body.device-ipad .app-main {
+  padding: 16px;
+}
+
+body.device-ipad .calendar-day {
+  min-height: 64px;
+}
+
+body.device-ipad .task-check input {
+  width: 26px;
+  height: 26px;
+}
+
+body.device-ipad .calendar-layout,
+body.device-ipad .drawings-layout {
+  grid-template-columns: 1fr;
+}
+
+body.device-ipad.orientation-landscape .calendar-layout {
+  grid-template-columns: 2fr 1fr;
+}
+
+body.device-ipad.orientation-landscape .drawings-layout {
+  grid-template-columns: 240px 1fr;
+}

@@ -1,0 +1,8 @@
+{
+  "name": "construction-project-dashboard",
+  "private": true,
+  "scripts": {
+    "sync-documents": "node scripts/generate-manifest.js",
+    "start": "npm run sync-documents && npx http-server -p 8080 -c-1"
+  }
+}

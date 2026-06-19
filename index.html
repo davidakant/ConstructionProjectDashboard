@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#2563eb">
+  <title>Construction Project Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <div class="header-left">
+        <h1 class="app-title">Construction Project Dashboard</h1>
+        <p class="project-name" id="projectName">Project: Riverside Office Complex</p>
+      </div>
+      <div class="header-right">
+        <span class="current-date" id="currentDate"></span>
+      </div>
+    </header>
+
+    <nav class="main-nav" id="mainNav">
+      <button class="nav-btn active" data-panel="calendar">Calendar</button>
+      <button class="nav-btn" data-panel="documents">Documents</button>
+    </nav>
+
+    <main class="app-main">
+      <!-- Calendar + Tasks Panel -->
+      <section class="panel active" id="panel-calendar" data-panel="calendar">
+        <div class="calendar-layout">
+          <div class="calendar-main">
+            <div class="calendar-toolbar">
+              <button id="prevMonth" class="icon-btn" aria-label="Previous month">&lsaquo;</button>
+              <h2 id="calendarMonthLabel"></h2>
+              <button id="nextMonth" class="icon-btn" aria-label="Next month">&rsaquo;</button>
+              <button class="btn btn-primary" id="addEventBtn">+ Add Event</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+          </div>
+
+          <aside class="calendar-sidebar">
+            <div class="sidebar-section upcoming-events">
+              <h3>Upcoming Events</h3>
+              <ul class="event-list" id="upcomingEventsList"></ul>
+            </div>
+
+            <div class="sidebar-section tasks-section">
+              <div class="panel-header">
+                <h3>Tasks</h3>
+                <button class="btn btn-primary" id="addTaskBtn">+ Add Task</button>
+              </div>
+              <div class="task-filters" id="taskFilters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="open">Open</button>
+                <button class="filter-btn" data-filter="done">Completed</button>
+              </div>
+              <ul class="task-list" id="taskList"></ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Documents Panel: Drawings + Visualizations + Photos -->
+      <section class="panel" id="panel-documents" data-panel="documents">
+        <div class="documents-layout">
+          <div class="documents-section">
+            <div class="panel-header">
+              <h2>Drawings</h2>
+              <label class="btn btn-secondary file-btn disabled" title="Coming soon">
+                + Add
+                <input type="file" id="drawingUpload" accept="image/*,.pdf" multiple hidden disabled>
+              </label>
+            </div>
+            <div class="drawings-layout">
+              <aside class="drawings-list-panel">
+                <ul class="drawings-list" id="drawingsList"></ul>
+              </aside>
+              <div class="drawing-viewer-wrapper">
+                <div class="drawing-viewer" id="drawingViewer">
+                  <p class="empty-state">Select a drawing to view</p>
+                </div>
+                <div class="drawing-zoom-controls">
+                  <button class="icon-btn zoom-btn" id="recenterBtn" aria-label="Re-center image" title="Re-center">&#8982;</button>
+                  <button class="icon-btn zoom-btn" id="zoomOutBtn" aria-label="Zoom out">&minus;</button>
+                  <button class="icon-btn zoom-btn" id="zoomInBtn" aria-label="Zoom in">+</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="documents-section">
+            <div class="panel-header">
+              <h2>Visualizations</h2>
+              <label class="btn btn-secondary file-btn disabled" title="Coming soon">
+                + Add Photos
+                <input type="file" id="galleryUpload" accept="image/*" multiple hidden disabled>
+              </label>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+          </div>
+
+          <div class="documents-section">
+            <div class="panel-header">
+              <h2>Photos</h2>
+              <label class="btn btn-secondary file-btn disabled" title="Coming soon">
+                + Add Photos
+                <input type="file" id="photoUpload" accept="image/*" multiple hidden disabled>
+              </label>
+            </div>
+            <div class="gallery-grid" id="photoGrid"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Add/Edit Task Modal -->
+  <div class="modal-overlay" id="taskModalOverlay">
+    <div class="modal" id="taskModal">
+      <h3 id="taskModalTitle">Add Task</h3>
+      <form id="taskForm">
+        <label>Title <input type="text" id="taskTitle" required></label>
+        <label>Due Date <input type="date" id="taskDueDate" required></label>
+        <label>Priority
+          <select id="taskPriority">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+        <label>Notes <textarea id="taskNotes"></textarea></label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelTaskBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="taskSubmitBtn">Save Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Event Modal -->
+  <div class="modal-overlay" id="eventModalOverlay">
+    <div class="modal" id="eventModal">
+      <h3>Add Event</h3>
+      <form id="eventForm">
+        <label>Title <input type="text" id="eventTitle" required></label>
+        <label>Date <input type="date" id="eventDate" required></label>
+        <label class="checkbox-label"><input type="checkbox" id="eventMilestone"> Mark as milestone</label>
+        <label>Notes <textarea id="eventNotes"></textarea></label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelEventBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lightbox for Visualizations -->
+  <div class="modal-overlay" id="lightboxOverlay">
+    <div class="lightbox">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+      <img id="lightboxImage" src="" alt="">
+      <p id="lightboxCaption"></p>
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/idb.js"></script>
+  <script src="js/device.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/tasks.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="drawings/manifest.js"></script>
+  <script src="js/drawings.js"></script>
+  <script src="visualizations/manifest.js"></script>
+  <script src="photos/manifest.js"></script>
+  <script src="js/lightbox.js"></script>
+  <script src="js/photoGrid.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
