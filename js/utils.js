@@ -26,11 +26,24 @@ window.App = window.App || {};
     return d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", year: "numeric" });
   }
 
+  function formatDateShort(dateStr) {
+    const d = new Date(dateStr + "T00:00:00");
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  }
+
   function escapeHtml(str) {
     const div = document.createElement("div");
     div.textContent = str ?? "";
     return div.innerHTML;
   }
 
-  window.App.Utils = { loadData, saveData, uid, formatDate, escapeHtml };
+  function formatCurrency(amount) {
+    return new Intl.NumberFormat(undefined, {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(amount || 0);
+  }
+
+  window.App.Utils = { loadData, saveData, uid, formatDate, formatDateShort, escapeHtml, formatCurrency };
 })();

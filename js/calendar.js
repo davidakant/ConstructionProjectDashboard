@@ -47,12 +47,10 @@ window.App = window.App || {};
 
       saveData(STORAGE_KEY, events);
       closeEventModal();
-      renderCalendar();
-      renderUpcoming();
+      refresh();
     });
 
-    renderCalendar();
-    renderUpcoming();
+    refresh();
   }
 
   function openEventModal(dateStr) {
@@ -156,8 +154,7 @@ window.App = window.App || {};
       li.querySelector(".delete-btn").addEventListener("click", () => {
         events = events.filter((e) => e.id !== ev.id);
         saveData(STORAGE_KEY, events);
-        renderCalendar();
-        renderUpcoming();
+        refresh();
       });
       list.appendChild(li);
     });
@@ -166,6 +163,7 @@ window.App = window.App || {};
   function refresh() {
     renderCalendar();
     renderUpcoming();
+    window.App.Gantt?.render();
   }
 
   function getEvents() {

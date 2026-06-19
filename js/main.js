@@ -10,13 +10,15 @@
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
-    const { Device, Nav, Tasks, Calendar, Drawings, Lightbox, ExportSeed, createPhotoGrid } = window.App;
+    const { Device, Nav, Tasks, Calendar, Gantt, Budget, Drawings, Lightbox, ExportSeed, createPhotoGrid } = window.App;
 
     Device.initDeviceDetection();
     setCurrentDate();
     Nav.initNav();
     Tasks.initTasks();
     Calendar.initCalendar();
+    Gantt.initGantt();
+    Budget.initBudget();
     Lightbox.initLightbox();
     ExportSeed.initExportSeed();
 

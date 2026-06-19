@@ -1,7 +1,7 @@
 window.App = window.App || {};
 
 (function () {
-  const { loadData, saveData, uid, formatDate, escapeHtml } = window.App.Utils;
+  const { loadData, saveData, uid, formatDate, formatDateShort, escapeHtml } = window.App.Utils;
   const STORAGE_KEY = "tasks";
 
   let tasks = [];
@@ -31,12 +31,14 @@ window.App = window.App || {};
 
       const priority = document.getElementById("taskPriority").value;
       const notes = document.getElementById("taskNotes").value.trim();
+      let startDate = document.getElementById("taskStartDate").value || dueDate;
+      if (startDate > dueDate) startDate = dueDate;
 
       if (editingId) {
         const task = tasks.find((t) => t.id === editingId);
-        Object.assign(task, { title, dueDate, priority, notes });
+        Object.assign(task, { title, startDate, dueDate, priority, notes });
       } else {
-        tasks.push({ id: uid(), title, dueDate, priority, notes, done: false, milestone: false });
+        tasks.push({ id: uid(), title, startDate, dueDate, priority, notes, done: false, milestone: false });
       }
 
       saveData(STORAGE_KEY, tasks);
@@ -61,6 +63,7 @@ window.App = window.App || {};
     document.getElementById("taskModalTitle").textContent = task ? "Edit Task" : "Add Task";
     document.getElementById("taskSubmitBtn").textContent = task ? "Save Changes" : "Save Task";
     document.getElementById("taskTitle").value = task ? task.title : "";
+    document.getElementById("taskStartDate").value = task ? task.startDate || task.dueDate : "";
     document.getElementById("taskDueDate").value = task ? task.dueDate : "";
     document.getElementById("taskPriority").value = task ? task.priority : "medium";
     document.getElementById("taskNotes").value = task ? task.notes : "";
@@ -104,7 +107,11 @@ window.App = window.App || {};
           </label>
           <div class="task-info">
             <span class="task-title">${escapeHtml(task.title)}</span>
-            <span class="task-due">Due ${formatDate(task.dueDate)}</span>
+            <span class="task-due">${
+              task.startDate && task.startDate !== task.dueDate
+                ? `${formatDateShort(task.startDate)} &ndash; ${formatDate(task.dueDate)}`
+                : `Due ${formatDate(task.dueDate)}`
+            }</span>
             ${task.notes ? `<span class="task-notes">${escapeHtml(task.notes)}</span>` : ""}
           </div>
           <span class="badge badge-${task.priority}">${task.priority}</span>

@@ -4,15 +4,17 @@ window.App = window.App || {};
   function buildSeedFileContents() {
     const tasks = window.App.Tasks.getTasks();
     const events = window.App.Calendar.getEvents();
+    const budgetItems = window.App.Budget.getBudgetItems();
     return [
       "window.App = window.App || {};",
       "",
-      "// Default tasks/events shown the first time the app loads in a browser",
-      "// with no saved data yet (e.g. a fresh clone, or a visitor on GitHub",
-      '// Pages). Regenerate this file from your current local data with the',
-      '// "Export for GitHub" button, then commit it to publish your changes.',
+      "// Default tasks/events/budget shown the first time the app loads in a",
+      "// browser with no saved data yet (e.g. a fresh clone, or a visitor on",
+      '// GitHub Pages). Regenerate this file from your current local data with',
+      '// the "Export for GitHub" button, then commit it to publish your changes.',
       `window.App.SeedTasks = ${JSON.stringify(tasks, null, 2)};`,
       `window.App.SeedEvents = ${JSON.stringify(events, null, 2)};`,
+      `window.App.SeedBudgetItems = ${JSON.stringify(budgetItems, null, 2)};`,
       "",
     ].join("\n");
   }

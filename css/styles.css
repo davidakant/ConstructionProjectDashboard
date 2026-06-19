@@ -294,7 +294,7 @@ button {
 .priority-medium { border-left: 4px solid var(--color-accent); }
 .priority-low { border-left: 4px solid var(--color-success); }
 
-/* ---------- Calendar ---------- */
+/* ---------- Schedule (Calendar / Gantt toggle) ---------- */
 
 .calendar-layout {
   display: grid;
@@ -302,6 +302,178 @@ button {
   gap: 24px;
   align-items: start;
 }
+
+.schedule-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.schedule-view-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--color-bg);
+  border-radius: 20px;
+  padding: 4px;
+}
+
+.view-toggle-btn {
+  border: none;
+  background: #64748b;
+  padding: 8px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.view-toggle-btn:hover:not(.active) {
+  background: #52606d;
+}
+
+.view-toggle-btn.active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.schedule-view {
+  display: none;
+}
+
+.schedule-view.active {
+  display: block;
+}
+
+/* ---------- Gantt ---------- */
+
+.gantt-chart {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.gantt-header,
+.gantt-row {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+}
+
+.gantt-header {
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+}
+
+.gantt-row + .gantt-row {
+  border-top: 1px solid var(--color-bg);
+}
+
+.gantt-row-label {
+  flex: 0 0 180px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding-right: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gantt-row.done .gantt-row-label {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.gantt-track {
+  position: relative;
+  flex: 1;
+  min-width: 480px;
+  height: 24px;
+}
+
+.gantt-header-track {
+  height: 20px;
+}
+
+.gantt-month-tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  border-left: 1px solid var(--color-border);
+  padding-left: 4px;
+  white-space: nowrap;
+}
+
+.gantt-gridline {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-left: 1px solid var(--color-bg);
+}
+
+.gantt-today-line {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  border-left: 2px solid var(--color-primary);
+  z-index: 2;
+}
+
+.gantt-bar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 18px;
+  min-width: 6px;
+  border-radius: 4px;
+  background: var(--color-accent);
+}
+
+.gantt-bar.priority-high {
+  background: var(--color-danger);
+}
+
+.gantt-bar.priority-medium {
+  background: var(--color-accent);
+}
+
+.gantt-bar.priority-low {
+  background: var(--color-success);
+}
+
+.gantt-bar.milestone-task {
+  background: var(--color-accent-dark);
+}
+
+.gantt-bar.done {
+  background: #94a3b8;
+}
+
+.gantt-milestone {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  background: var(--color-accent-dark);
+  transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 2px;
+}
+
+.gantt-row.done .gantt-milestone {
+  background: #94a3b8;
+}
+
+/* ---------- Calendar ---------- */
 
 .calendar-toolbar {
   display: flex;
@@ -624,6 +796,139 @@ button {
   border-radius: 50%;
 }
 
+/* ---------- Budget ---------- */
+
+.budget-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+}
+
+.summary-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.budget-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.budget-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.budget-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.budget-category-badge {
+  align-self: flex-start;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+.budget-item-name {
+  font-weight: 600;
+}
+
+.budget-item-notes {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.budget-amounts {
+  flex: 0 0 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.budget-numbers {
+  font-size: 0.85rem;
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.budget-sep {
+  color: var(--color-text-muted);
+}
+
+.budget-budgeted-amt {
+  color: var(--color-text-muted);
+}
+
+.budget-progress {
+  background: var(--color-bg);
+  border-radius: 4px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.budget-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--color-success);
+}
+
+.budget-progress-fill.near {
+  background: var(--color-accent);
+}
+
+.budget-progress-fill.over {
+  background: var(--color-danger);
+}
+
+.budget-variance {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.budget-variance.over {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
 /* ---------- Shared ---------- */
 
 .empty-state {
@@ -758,6 +1063,10 @@ button {
   .drawing-viewer {
     order: 1;
     min-height: 50vh;
+  }
+
+  .budget-summary {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

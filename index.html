@@ -13,8 +13,8 @@
   <div id="app">
     <header class="app-header">
       <div class="header-left">
-        <h1 class="app-title">Construction Project Dashboard</h1>
-        <p class="project-name" id="projectName">Project: Riverside Office Complex</p>
+        <h1 class="app-title">Project Dashboard</h1>
+        <p class="project-name" id="projectName">Project: Riverside School Yard</p>
       </div>
       <div class="header-right">
         <button class="btn btn-secondary" id="exportSeedBtn" title="Download seed.js with your current tasks &amp; events, to replace data/seed.js and commit">Export for GitHub</button>
@@ -23,22 +23,36 @@
     </header>
 
     <nav class="main-nav" id="mainNav">
-      <button class="nav-btn active" data-panel="calendar">Calendar</button>
+      <button class="nav-btn active" data-panel="schedule">Schedule</button>
       <button class="nav-btn" data-panel="documents">Documents</button>
+      <button class="nav-btn" data-panel="budget">Budget</button>
     </nav>
 
     <main class="app-main">
-      <!-- Calendar + Tasks Panel -->
-      <section class="panel active" id="panel-calendar" data-panel="calendar">
+      <!-- Schedule + Tasks Panel -->
+      <section class="panel active" id="panel-schedule" data-panel="schedule">
         <div class="calendar-layout">
           <div class="calendar-main">
-            <div class="calendar-toolbar">
-              <button id="prevMonth" class="icon-btn" aria-label="Previous month">&lsaquo;</button>
-              <h2 id="calendarMonthLabel"></h2>
-              <button id="nextMonth" class="icon-btn" aria-label="Next month">&rsaquo;</button>
+            <div class="schedule-toolbar">
+              <div class="schedule-view-toggle" id="scheduleViewToggle">
+                <button class="view-toggle-btn active" data-view="calendar">Calendar</button>
+                <button class="view-toggle-btn" data-view="gantt">Gantt</button>
+              </div>
               <button class="btn btn-primary" id="addEventBtn">+ Add Event</button>
             </div>
-            <div class="calendar-grid" id="calendarGrid"></div>
+
+            <div class="schedule-view active" data-view="calendar">
+              <div class="calendar-toolbar">
+                <button id="prevMonth" class="icon-btn" aria-label="Previous month">&lsaquo;</button>
+                <h2 id="calendarMonthLabel"></h2>
+                <button id="nextMonth" class="icon-btn" aria-label="Next month">&rsaquo;</button>
+              </div>
+              <div class="calendar-grid" id="calendarGrid"></div>
+            </div>
+
+            <div class="schedule-view" data-view="gantt">
+              <div class="gantt-chart" id="ganttChart"></div>
+            </div>
           </div>
 
           <aside class="calendar-sidebar">
@@ -114,6 +128,35 @@
           </div>
         </div>
       </section>
+
+      <!-- Budget Panel -->
+      <section class="panel" id="panel-budget" data-panel="budget">
+        <div class="panel-header">
+          <h2>Budget</h2>
+          <button class="btn btn-primary" id="addBudgetItemBtn">+ Add Line Item</button>
+        </div>
+
+        <div class="budget-summary" id="budgetSummary">
+          <div class="summary-card">
+            <span class="summary-label">Total Budget</span>
+            <span class="summary-value" id="summaryTotalBudget">$0</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Total Spent</span>
+            <span class="summary-value" id="summaryTotalActual">$0</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">Remaining</span>
+            <span class="summary-value" id="summaryRemaining">$0</span>
+          </div>
+          <div class="summary-card">
+            <span class="summary-label">% Used</span>
+            <span class="summary-value" id="summaryPercentUsed">0%</span>
+          </div>
+        </div>
+
+        <ul class="budget-list" id="budgetList"></ul>
+      </section>
     </main>
   </div>
 
@@ -123,6 +166,7 @@
       <h3 id="taskModalTitle">Add Task</h3>
       <form id="taskForm">
         <label>Title <input type="text" id="taskTitle" required></label>
+        <label>Start Date <input type="date" id="taskStartDate"></label>
         <label>Due Date <input type="date" id="taskDueDate" required></label>
         <label>Priority
           <select id="taskPriority">
@@ -157,6 +201,36 @@
     </div>
   </div>
 
+  <!-- Add/Edit Budget Item Modal -->
+  <div class="modal-overlay" id="budgetModalOverlay">
+    <div class="modal" id="budgetModal">
+      <h3 id="budgetModalTitle">Add Line Item</h3>
+      <form id="budgetForm">
+        <label>Category
+          <select id="budgetCategory">
+            <option value="Site Preparation">Site Preparation</option>
+            <option value="Safety Surfacing">Safety Surfacing</option>
+            <option value="Playground Equipment">Playground Equipment</option>
+            <option value="Sports Courts">Sports Courts</option>
+            <option value="Fencing & Safety">Fencing &amp; Safety</option>
+            <option value="Landscaping">Landscaping</option>
+            <option value="Furnishings & Amenities">Furnishings &amp; Amenities</option>
+            <option value="Permits & Fees">Permits &amp; Fees</option>
+            <option value="Contingency">Contingency</option>
+          </select>
+        </label>
+        <label>Item <input type="text" id="budgetItem" required></label>
+        <label>Budgeted Amount ($) <input type="number" id="budgetBudgeted" min="0" step="1" required></label>
+        <label>Actual Spent ($) <input type="number" id="budgetActual" min="0" step="1"></label>
+        <label>Notes <textarea id="budgetNotes"></textarea></label>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelBudgetBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="budgetSubmitBtn">Save Line Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- Lightbox for Visualizations -->
   <div class="modal-overlay" id="lightboxOverlay">
     <div class="lightbox">
@@ -173,6 +247,8 @@
   <script src="data/seed.js"></script>
   <script src="js/tasks.js"></script>
   <script src="js/calendar.js"></script>
+  <script src="js/gantt.js"></script>
+  <script src="js/budget.js"></script>
   <script src="js/exportSeed.js"></script>
   <script src="drawings/manifest.js"></script>
   <script src="js/drawings.js"></script>
